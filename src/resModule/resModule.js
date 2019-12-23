@@ -1,6 +1,6 @@
 // code 0 错误  1 正确
 
-const successMoudel = (data = '', msg = 'success', code = 1) => {
+const successModule = (data = '', msg = 'success', code = 1) => {
   return {
     data,
     msg,
@@ -9,7 +9,7 @@ const successMoudel = (data = '', msg = 'success', code = 1) => {
   };
 };
 
-const errorMoudell = (data = '', msg = 'error', code = 0) => {
+const errorModule = (data = '', msg = 'error', code = 0) => {
   return {
     data,
     msg,
@@ -19,6 +19,6 @@ const errorMoudell = (data = '', msg = 'error', code = 0) => {
 };
 
 module.exports = {
-  successMoudel,
-  errorMoudell
+  successModule,
+  errorModule
 };

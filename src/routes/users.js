@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { exec } = require('../db/mysql');
-const { successMoudel, errorMoudell } = require('../resMoudel/resMoudel');
+const { successModule, errorModule } = require('../resModule/resModule');
 
 /* GET users listing. */
 router.post('/register', async function(req, res, next) {
@@ -19,10 +19,10 @@ router.post('/register', async function(req, res, next) {
     const addSql = `INSERT into users(username,password,token) values('${username}','${password}','${token}')`;
     const addResult = await exec(addSql);
     if (addResult) {
-      res.json(successMoudel('', '注册成功'));
+      res.json(successModule('', '注册成功'));
     }
   } else {
-    res.json(errorMoudell('失败', '账号已存在'));
+    res.json(errorModule('失败', '账号已存在'));
   }
 });
 
@@ -34,12 +34,12 @@ router.post('/login', async function(req, res, next) {
   );
   if (!(isData == false)) {
     if (password === isData[0].password) {
-      res.json(successMoudel(isData[0], '登陆成功'));
+      res.json(successModule(isData[0], '登陆成功'));
     } else {
-      res.json(errorMoudell('失败', '密码错误'));
+      res.json(errorModule('失败', '密码错误'));
     }
   } else {
-    res.json(errorMoudell('失败', '没有此用户'));
+    res.json(errorModule('失败', '没有此用户'));
   }
 });
 router.get('/userInfo', async function(req, res, next) {
@@ -47,7 +47,7 @@ router.get('/userInfo', async function(req, res, next) {
   const userData = await exec(`select * from users where token = '${token}'`);
   delete userData[0].token;
   delete userData[0].password;
-  res.json(errorMoudell(userData[0]));
+  res.json(errorModule(userData[0]));
 });
 router.post('/updateUserInfo', async function(req, res, next) {
   const token = req.headers.token;
@@ -55,7 +55,7 @@ router.post('/updateUserInfo', async function(req, res, next) {
   const sql = `update users set realname= '${realname}', email='${email}',hobbies='${hobbies}' where token='${token}'`;
   const userData = await exec(sql);
   if (userData) {
-    res.json(successMoudel());
+    res.json(successModule());
   }
 });
 
@@ -66,9 +66,9 @@ router.post('/resetPassword', async function(req, res, next) {
     if(oldPassword == user[0].password){
         const sql = `update users set password= '${newPassword}' where token='${token}'`;
         await exec(sql);
-        res.json(successMoudel('','更换密码成功'));
+        res.json(successModule('','更换密码成功'));
     }else{
-        res.json(errorMoudell('','旧密码错误'));
+        res.json(errorModule('','旧密码错误'));
     }
   });
 
