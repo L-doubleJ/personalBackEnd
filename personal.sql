@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2019-12-23 18:10:57
+Date: 2019-12-24 18:06:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,6 +35,42 @@ CREATE TABLE `expenses` (
 -- ----------------------------
 INSERT INTO `expenses` VALUES ('5', '1', '1575907200', '28', '收保护费，谁敢哔哔赖赖', '123.00', '杰哥保护费');
 INSERT INTO `expenses` VALUES ('6', '2', '1575216000', '28', '', '12.00', '买衣服');
+
+-- ----------------------------
+-- Table structure for relation
+-- ----------------------------
+DROP TABLE IF EXISTS `relation`;
+CREATE TABLE `relation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) NOT NULL,
+  `name` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `relation` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `remark` longtext COLLATE utf8mb4_general_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of relation
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for remeber
+-- ----------------------------
+DROP TABLE IF EXISTS `remeber`;
+CREATE TABLE `remeber` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `date` int(11) NOT NULL,
+  `remark` longtext COLLATE utf8mb4_general_ci NOT NULL,
+  `userid` int(11) NOT NULL,
+  `state` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of remeber
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for users
