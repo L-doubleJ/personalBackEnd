@@ -51,7 +51,7 @@ router.post('/update', async function(req, res, next){
 
 
 router.delete('/delete', async function(req, res, next){
-     const id = req.query.id;
+     const id = req.body.id;
     const sql = `delete from expenses where id = '${id}'`;
      await exec(sql);
     res.json(successModule('','删除成功'));
