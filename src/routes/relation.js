@@ -4,10 +4,11 @@ const { exec } = require('../db/mysql');
 const { successModule, errorModule } = require('../resModule/resModule');
 
 router.get('/list', async function(req, res, next){ 
+    const keyWord = req.query.keyWord || '';
     const token = req.headers.token;
     const user =await exec(`select * from users where token = '${token}'`);
     const id = user[0].id; 
-    const data =  await exec(`select * from relation where userid = '${id}'`);
+    const data =  await exec(`select * from relation where userid = '${id}' and (realname like '%${keyWord}%' or name like '%${keyWord}%')`);
     res.json(successModule(data))
 });
 
