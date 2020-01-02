@@ -22,10 +22,11 @@ function timeToTimestamp(date) {
 
 router.get('/list', async function(req, res, next){ 
     const keyWord = req.query.keyWord || '';
+    const state = req.query.state || '';
     const token = req.headers.token;
     const user =await exec(`select * from users where token = '${token}'`);
     const id = user[0].id; 
-    const data =  await exec(`select * from expenses  where userid = '${id}' and title like '%${keyWord}%'`);
+    const data =  await exec(`select * from expenses  where userid = '${id}' and title like '%${keyWord}%' and state like '%${state}%'`);
     data.map(item=>{
         item.date = timestampToTime(item.date);
     })
