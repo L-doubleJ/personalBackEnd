@@ -7,6 +7,7 @@ var userRouter = require('./src/routes/users');
 var expensesRouter = require('./src/routes/expenses');
 var remeberRouter = require('./src/routes/remeber');
 var relationRouter = require('./src/routes/relation');
+var publicRouter = require('./src/routes/public');
 // var usersRouter = require('./routes/users');
 
 var app = express();
@@ -35,6 +36,7 @@ app.use('/api/users', userRouter);
 app.use('/api/expenses', expensesRouter);
 app.use('/api/remeber', remeberRouter);
 app.use('/api/relation', relationRouter);
+app.use('/api/public', publicRouter);
 // app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
