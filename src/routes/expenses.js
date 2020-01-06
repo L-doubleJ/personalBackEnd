@@ -27,10 +27,17 @@ router.get('/list', async function(req, res, next){
     const user =await exec(`select * from users where token = '${token}'`);
     const id = user[0].id; 
     const data =  await exec(`select * from expenses  where userid = '${id}' and title like '%${keyWord}%' and state like '%${state}%'`);
+    let paytotal = 0;
+    let gettotal =0;
     data.map(item=>{
         item.date = timestampToTime(item.date);
+        if(item.state == 1){
+            gettotal = gettotal + item.money;
+        }else{
+            paytotal = paytotal　+ item.money;
+        }
     })
-    res.json(successModule(data))
+    res.json(successModule({data,gettotal,paytotal}))
 });
 router.post('/add', async function(req, res, next){     
     let {remark,state,date,title,money} = req.body;
