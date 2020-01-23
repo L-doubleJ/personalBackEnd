@@ -26,12 +26,13 @@ router.post("/sendEmail", async function(req, res, next) {
       from: "792972988@qq.com",
       to: user.email,
       subject: "找回密码",
-      html: "你的密码是：" + user.password
+      html: "个人事务管理系统，你的密码是：" + user.password
+    //   
     },
     function(error, response) {
       if (error) {
         res.json(errorModule("", "发送失败"));
-        console.log("失败");
+        console.log(error);
       } else {
         res.json(successModule("", "发送成功"));
         console.log("成功");
